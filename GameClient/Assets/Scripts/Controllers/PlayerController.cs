@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
         get { return _state; }
         set
         {
-            UpdateAnimation();
-
             if (_state.Equals(value))
                 return;
 
@@ -73,29 +71,41 @@ public class PlayerController : MonoBehaviour
 
     protected virtual void UpdateController()
     {
+        UpdateAnimation();
+
         _positionInfo.X = transform.position.x;
         _positionInfo.Y = transform.position.y;
         _positionInfo.Z = transform.position.z;
         _positionInfo.Yaw = transform.rotation.eulerAngles.y;
 
-        UpdateMove();
+        switch (State)
+        {
+            case MoveState.Idle:
+                UpdateIdle();
+                break;
+            case MoveState.Run:
+                UpdateMove();
+                break;
+        }
+  }
+
+    protected virtual void UpdateIdle()
+    {
+
     }
 
     protected virtual void UpdateMove()
     {
-        if (State == MoveState.Run)
-        {
-            Quaternion destRotation = Quaternion.Euler(0.0f, _destPosInfo.Yaw, 0.0f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, destRotation, 10 * Time.deltaTime);
+        Quaternion destRotation = Quaternion.Euler(0.0f, _destPosInfo.Yaw, 0.0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, destRotation, 10 * Time.deltaTime);
+        //transform.rotation = destRotation;
 
-            Vector3 destPosition = new Vector3(_destPosInfo.X, _destPosInfo.Y, _destPosInfo.Z);
-            transform.position = Vector3.MoveTowards(transform.position, destPosition, _moveSpeed * Time.deltaTime);
-        }
-        else
-        {
-            //  목적지까지 도착하지 못했다면..?
-            ;
-        }
+        Vector3 forward = destRotation * Vector3.forward;
+        Vector3 targetPosition = transform.position + forward;
+        targetPosition.y = 0;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed * Time.deltaTime);
+   
+        //  목적지까지 도착하지 못했다면..?
     }
 
     #endregion

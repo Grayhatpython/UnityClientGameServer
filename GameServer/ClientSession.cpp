@@ -12,6 +12,7 @@ ClientSession::~ClientSession()
 
 void  ClientSession::OnConnected() 
 {
+	cout << "ClientSession Connected" << endl;
 	GClientSessionManager->Add(static_pointer_cast<ClientSession>(shared_from_this()));
 }
 

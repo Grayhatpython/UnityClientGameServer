@@ -150,6 +150,8 @@ void Room::Leave(uint32 gameObjectId)
 
 void Room::Move(Protocol::C_MOVE movePacket)
 {
+	TRACE_THREAD_CALL_STACK;
+
 	//	TODO : player ID check -> 패킷 조작으로 다른 플레이어의 좌표를 무작위로 바꾼다면?
 	const auto objectId = movePacket.positioninfo().objectid();
 	if (_gameObjects.find(objectId) == _gameObjects.end())
@@ -168,7 +170,7 @@ void Room::Move(Protocol::C_MOVE movePacket)
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(moveSendPacket);
 		Broadcast(sendBuffer);
 
-		std::cout << "Move Packet Received : " << objectId << std::endl;
+		//std::cout << "Move Packet Received : " << objectId << std::endl;
 	}
 }
 
@@ -196,6 +198,8 @@ void Room::Broadcast(SendBufferRef sendBuffer, uint32 ignoreId)
 
 void Room::Update()
 {
+	//TRACE_THREAD_CALL_STACK;
+
 	//	Packet handle Processing per frame
 	PopAllExecute();
 }

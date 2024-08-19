@@ -75,6 +75,8 @@ bool C_LEAVE_GAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& ses
 
 bool C_MOVE_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::C_MOVE& packet)
 {
+	TRACE_THREAD_CALL_STACK;
+
 	auto clientSession = static_pointer_cast<ClientSession>(session);
 	auto player = clientSession->_player;
 

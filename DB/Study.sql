@@ -15,6 +15,8 @@ SELECT * FROM sys.columns WHERE object_id = '885578193';
 
 --	테이블 제약조건 확인
 EXEC sp_help Department;
+
+SP_HELPCONSTRAINT Department;
 select * from INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE where table_name = 'Department'
 
 --	현재 세션과 연결되어 있는 데이터베이스 이름 반환
@@ -724,3 +726,60 @@ DELETE FROM Account WHERE balance <= 1000000;
 --	strict schedule
 --	schedule내에서 어떤 transaction도 commit 되지 않는 transaction들이 write한 데이터를 쓰지도 읽지도 않는 경우
 --	rollback할 때 recovery가 쉽다. transaction 이전 상태로 돌려놓기만 하면 된다.
+
+
+CREATE DATABASE designDB;
+
+-- 엔티티(테이블)간의 관계를 정의한 다이어그램 (ERD) -> 데이터베이스 다이어그램
+
+use designDB;
+
+SELECT * FROM Company;
+SELECT * FROM Department;
+
+INSERT INTO Company VALUES(N'애플');
+INSERT INTO Company VALUES(N'엔비디아');
+INSERT INTO Department VALUES(1,N'개발팀',1);
+INSERT INTO Department VALUES(2,N'영업팀',1);
+INSERT INTO Department VALUES(1,N'디자인팀',2);
+INSERT INTO Department (DepartmentId, DepartmentName) VALUES(2,N'아트팀');
+
+UPDATE Department SET CompanyId = 2 WHERE DepartmentId = 2;
+
+--	컬럼 이름 변경
+sp_rename 'Department.[CompnayId]', N'CompanyId', 'COLUMN'
+--	컬럼 타입 변경
+ALTER TABLE Department ALTER COLUMN DepartmentName nvarchar(50);
+
+SELECT * FROM Company AS C
+LEFT JOIN Department AS D ON C.CompanyId = D.CompanyId
+ORDER BY C.CompanyId, D.DepartmentId
+
+DELETE FROM Department;
+
+ALTER TABLE Department ADD CONSTRAINT Department_PK PRIMARY KEY (DepartmentId, CompanyId)
+
+CREATE TABLE TestDepartment (
+	departmentId INT PRIMARY KEY NOT NULL,
+	departmentName NVARCHAR(50),
+	highDepartmentId INT FOREIGN KEY REFERENCES TestDepartment(departmentId),
+);
+
+SELECT * FROM TestDepartment;
+
+DELETE FROM TestDepartment WHERE departmentId = 3;
+--	1:M 재귀 관계
+--	최상위
+INSERT INTO TestDepartment VALUES(1, '개발팀', NULL);
+INSERT INTO TestDepartment VALUES(2, '개발1팀', 1);
+INSERT INTO TestDepartment VALUES(3, '개발2팀', 1);
+INSERT INTO TestDepartment VALUES(4, '개발1-1팀', 2);
+INSERT INTO TestDepartment VALUES(5, '개발1-2팀', 2);
+
+SELECT * FROM TestDepartment AS A
+INNER JOIN ( SELECT * FROM TestDepartment ) AS B ON A.departmentId = B.highDepartmentId
+WHERE A.departmentId = 2
+
+--  ALTER TABLE [테이블명] DROP CONSTRAINT [FOREIGN KEY명]
+
+ALTER TABLE TestDepartment ADD CONSTRAINT Department_Company_FK FOREIGN KEY (CompanyId) REFERENCES Company(CompanyId);

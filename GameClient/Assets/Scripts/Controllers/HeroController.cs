@@ -38,6 +38,8 @@ public class HeroController : PlayerController
     {
         UpdateInput();
 
+        base.UpdateController();
+
         bool focreMovePacketSend = false;
 
         if(_prevMoveInput != _moveInput)
@@ -45,11 +47,6 @@ public class HeroController : PlayerController
             focreMovePacketSend = true;
             _prevMoveInput = _moveInput;
         }
-
-        if (_moveInput == Vector2.zero)
-            State = MoveState.Idle;
-        else
-            State = MoveState.Run;
 
         _calcMovePacketSendTime -= Time.deltaTime;
 
@@ -65,31 +62,44 @@ public class HeroController : PlayerController
             Managers.Network.Send(movePacket);
         }
 
-        base.UpdateController();
+    }
+
+    protected override void UpdateIdle()
+    {
+
     }
 
     protected override void UpdateMove()
     {
-        if (_moveDirection.magnitude > 0)
-        {
-            Vector3 targetPosition = transform.position + _moveDirection;
-            targetPosition.y = 0;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed * Time.deltaTime);
+        Vector3 targetPosition = transform.position + _moveDirection;
+        targetPosition.y = 0;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed * Time.deltaTime);
 
-            Quaternion rotate = Quaternion.LookRotation(_moveDirection);
-            _desiredYaw = rotate.eulerAngles.y;
+        Quaternion rotate = Quaternion.LookRotation(_moveDirection);
+        _desiredYaw = rotate.eulerAngles.y;
 
-            Quaternion destRotation = Quaternion.Euler(0.0f, _desiredYaw, 0.0f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, destRotation, 10 * Time.deltaTime);
+        //Quaternion destRotation = Quaternion.Euler(0.0f, _desiredYaw, 0.0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotate, 10 * Time.deltaTime);
 
-            //_characterController.Move(_moveDirection * _moveSpeed * Time.deltaTime);
-        }
-
+        //_characterController.Move(_moveDirection * _moveSpeed * Time.deltaTime);
     }
 
     private void UpdateInput()
     {
-        _moveDirection = new Vector3(_moveInput.x, 0, _moveInput.y);
+        Vector3 forward = Camera.main.transform.forward;    
+        Vector3 right = Camera.main.transform.right;
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        _moveDirection = forward * _moveInput.y + right * _moveInput.x;  
+
+        if (_moveDirection.magnitude > 0)
+            State = MoveState.Run;
+        else
+            State = MoveState.Idle;
     }
 
     #endregion

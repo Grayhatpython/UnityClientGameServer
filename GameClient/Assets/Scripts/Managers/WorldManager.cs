@@ -26,6 +26,9 @@ public class WorldManager
             Hero.Id = objectInfo.ObjectId;
             Hero.PosInfo = objectInfo.PositionInfo;
             Hero.DestPosInfo = objectInfo.PositionInfo;
+
+            CameraController cc = Camera.main.GetComponent<CameraController>();
+            cc.Target = go;
         }
         else
         {

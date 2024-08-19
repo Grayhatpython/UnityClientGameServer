@@ -67,7 +67,7 @@ void GameServer::DoProcessJob()
 				//	Game Logic
 				//ThreadManager::DoGlobalJobQueueExecute();
 
-			});
+			},L"Worker Thread");
 	}
 
 	//	Thread Join
