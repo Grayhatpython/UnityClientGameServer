@@ -42,7 +42,8 @@ public:
 public:
 	//	move
 	void	Push(JobRef job, bool isPushOnly = false);
-	void	Execute(bool isPushOnly = false);
+	void	ScheduleTimeExecute();
+	void	PopAllExecute();
 
 protected:
 	LockQueue<JobRef>	_jobQueue;

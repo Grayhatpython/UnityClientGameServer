@@ -19,7 +19,7 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace Protocol {
 constexpr PositionInfo::PositionInfo(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : objectid_(uint64_t{0u})
+  : objectid_(0u)
   , x_(0)
   , y_(0)
   , z_(0)
@@ -38,7 +38,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PositionInfoDefaultTypeInternal
 constexpr ObjectInfo::ObjectInfo(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : positioninfo_(nullptr)
-  , objectid_(uint64_t{0u})
+  , objectid_(0u)
   , objecttype_(0)
 {}
 struct ObjectInfoDefaultTypeInternal {
@@ -88,10 +88,10 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"r\n\014"
-  "PositionInfo\022\020\n\010objectId\030\001 \001(\004\022\t\n\001x\030\002 \001("
+  "PositionInfo\022\020\n\010objectId\030\001 \001(\r\022\t\n\001x\030\002 \001("
   "\002\022\t\n\001y\030\003 \001(\002\022\t\n\001z\030\004 \001(\002\022\013\n\003yaw\030\005 \001(\002\022\"\n\005"
   "state\030\006 \001(\0162\023.Protocol.MoveState\"v\n\nObje"
-  "ctInfo\022\020\n\010objectId\030\001 \001(\004\022(\n\nobjectType\030\002"
+  "ctInfo\022\020\n\010objectId\030\001 \001(\r\022(\n\nobjectType\030\002"
   " \001(\0162\024.Protocol.ObjectType\022,\n\014positionIn"
   "fo\030\003 \001(\0132\026.Protocol.PositionInfob\006proto3"
   ;
@@ -179,10 +179,10 @@ const char* PositionInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // uint64 objectId = 1;
+      // uint32 objectId = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          objectid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          objectid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -251,10 +251,10 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 objectId = 1;
+  // uint32 objectId = 1;
   if (this->objectid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_objectid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_objectid(), target);
   }
 
   // float x = 2;
@@ -304,10 +304,10 @@ size_t PositionInfo::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // uint64 objectId = 1;
+  // uint32 objectId = 1;
   if (this->objectid() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->_internal_objectid());
   }
 
@@ -504,10 +504,10 @@ const char* ObjectInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // uint64 objectId = 1;
+      // uint32 objectId = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          objectid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          objectid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -555,10 +555,10 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 objectId = 1;
+  // uint32 objectId = 1;
   if (this->objectid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_objectid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_objectid(), target);
   }
 
   // .Protocol.ObjectType objectType = 2;
@@ -599,10 +599,10 @@ size_t ObjectInfo::ByteSizeLong() const {
         *positioninfo_);
   }
 
-  // uint64 objectId = 1;
+  // uint32 objectId = 1;
   if (this->objectid() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->_internal_objectid());
   }
 

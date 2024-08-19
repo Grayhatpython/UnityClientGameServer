@@ -492,13 +492,13 @@ class C_ENTER_GAME final :
   enum : int {
     kPlayerIndexFieldNumber = 1,
   };
-  // uint64 playerIndex = 1;
+  // uint32 playerIndex = 1;
   void clear_playerindex();
-  ::PROTOBUF_NAMESPACE_ID::uint64 playerindex() const;
-  void set_playerindex(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 playerindex() const;
+  void set_playerindex(::PROTOBUF_NAMESPACE_ID::uint32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_playerindex() const;
-  void _internal_set_playerindex(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_playerindex() const;
+  void _internal_set_playerindex(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.C_ENTER_GAME)
@@ -508,7 +508,7 @@ class C_ENTER_GAME final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 playerindex_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 playerindex_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -1155,26 +1155,26 @@ class S_DESPAWN final :
   enum : int {
     kObjectIdsFieldNumber = 1,
   };
-  // repeated uint64 objectIds = 1;
+  // repeated uint32 objectIds = 1;
   int objectids_size() const;
   private:
   int _internal_objectids_size() const;
   public:
   void clear_objectids();
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_objectids(int index) const;
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_objectids(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >&
       _internal_objectids() const;
-  void _internal_add_objectids(::PROTOBUF_NAMESPACE_ID::uint64 value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
+  void _internal_add_objectids(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >*
       _internal_mutable_objectids();
   public:
-  ::PROTOBUF_NAMESPACE_ID::uint64 objectids(int index) const;
-  void set_objectids(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value);
-  void add_objectids(::PROTOBUF_NAMESPACE_ID::uint64 value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
+  ::PROTOBUF_NAMESPACE_ID::uint32 objectids(int index) const;
+  void set_objectids(int index, ::PROTOBUF_NAMESPACE_ID::uint32 value);
+  void add_objectids(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >&
       objectids() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >*
       mutable_objectids();
 
   // @@protoc_insertion_point(class_scope:Protocol.S_DESPAWN)
@@ -1184,7 +1184,7 @@ class S_DESPAWN final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 > objectids_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > objectids_;
   mutable std::atomic<int> _objectids_cached_byte_size_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
@@ -1735,13 +1735,13 @@ class S_CHAT final :
   std::string* _internal_mutable_msg();
   public:
 
-  // uint64 playerId = 1;
+  // uint32 playerId = 1;
   void clear_playerid();
-  ::PROTOBUF_NAMESPACE_ID::uint64 playerid() const;
-  void set_playerid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 playerid() const;
+  void set_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_playerid() const;
-  void _internal_set_playerid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_playerid() const;
+  void _internal_set_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.S_CHAT)
@@ -1752,7 +1752,7 @@ class S_CHAT final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr msg_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 playerid_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 playerid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -1831,22 +1831,22 @@ S_LOGIN::players() const {
 
 // C_ENTER_GAME
 
-// uint64 playerIndex = 1;
+// uint32 playerIndex = 1;
 inline void C_ENTER_GAME::clear_playerindex() {
-  playerindex_ = uint64_t{0u};
+  playerindex_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 C_ENTER_GAME::_internal_playerindex() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 C_ENTER_GAME::_internal_playerindex() const {
   return playerindex_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 C_ENTER_GAME::playerindex() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 C_ENTER_GAME::playerindex() const {
   // @@protoc_insertion_point(field_get:Protocol.C_ENTER_GAME.playerIndex)
   return _internal_playerindex();
 }
-inline void C_ENTER_GAME::_internal_set_playerindex(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void C_ENTER_GAME::_internal_set_playerindex(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   playerindex_ = value;
 }
-inline void C_ENTER_GAME::set_playerindex(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void C_ENTER_GAME::set_playerindex(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   _internal_set_playerindex(value);
   // @@protoc_insertion_point(field_set:Protocol.C_ENTER_GAME.playerIndex)
 }
@@ -2006,7 +2006,7 @@ S_SPAWN::objects() const {
 
 // S_DESPAWN
 
-// repeated uint64 objectIds = 1;
+// repeated uint32 objectIds = 1;
 inline int S_DESPAWN::_internal_objectids_size() const {
   return objectids_.size();
 }
@@ -2016,38 +2016,38 @@ inline int S_DESPAWN::objectids_size() const {
 inline void S_DESPAWN::clear_objectids() {
   objectids_.Clear();
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 S_DESPAWN::_internal_objectids(int index) const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 S_DESPAWN::_internal_objectids(int index) const {
   return objectids_.Get(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 S_DESPAWN::objectids(int index) const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 S_DESPAWN::objectids(int index) const {
   // @@protoc_insertion_point(field_get:Protocol.S_DESPAWN.objectIds)
   return _internal_objectids(index);
 }
-inline void S_DESPAWN::set_objectids(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void S_DESPAWN::set_objectids(int index, ::PROTOBUF_NAMESPACE_ID::uint32 value) {
   objectids_.Set(index, value);
   // @@protoc_insertion_point(field_set:Protocol.S_DESPAWN.objectIds)
 }
-inline void S_DESPAWN::_internal_add_objectids(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void S_DESPAWN::_internal_add_objectids(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   objectids_.Add(value);
 }
-inline void S_DESPAWN::add_objectids(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void S_DESPAWN::add_objectids(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   _internal_add_objectids(value);
   // @@protoc_insertion_point(field_add:Protocol.S_DESPAWN.objectIds)
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >&
 S_DESPAWN::_internal_objectids() const {
   return objectids_;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >&
 S_DESPAWN::objectids() const {
   // @@protoc_insertion_point(field_list:Protocol.S_DESPAWN.objectIds)
   return _internal_objectids();
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >*
 S_DESPAWN::_internal_mutable_objectids() {
   return &objectids_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >*
 S_DESPAWN::mutable_objectids() {
   // @@protoc_insertion_point(field_mutable_list:Protocol.S_DESPAWN.objectIds)
   return _internal_mutable_objectids();
@@ -2272,22 +2272,22 @@ inline void C_CHAT::set_allocated_msg(std::string* msg) {
 
 // S_CHAT
 
-// uint64 playerId = 1;
+// uint32 playerId = 1;
 inline void S_CHAT::clear_playerid() {
-  playerid_ = uint64_t{0u};
+  playerid_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 S_CHAT::_internal_playerid() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 S_CHAT::_internal_playerid() const {
   return playerid_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 S_CHAT::playerid() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 S_CHAT::playerid() const {
   // @@protoc_insertion_point(field_get:Protocol.S_CHAT.playerId)
   return _internal_playerid();
 }
-inline void S_CHAT::_internal_set_playerid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void S_CHAT::_internal_set_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   playerid_ = value;
 }
-inline void S_CHAT::set_playerid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void S_CHAT::set_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   _internal_set_playerid(value);
   // @@protoc_insertion_point(field_set:Protocol.S_CHAT.playerId)
 }

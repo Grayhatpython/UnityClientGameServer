@@ -185,13 +185,13 @@ class PositionInfo final :
     kYawFieldNumber = 5,
     kStateFieldNumber = 6,
   };
-  // uint64 objectId = 1;
+  // uint32 objectId = 1;
   void clear_objectid();
-  ::PROTOBUF_NAMESPACE_ID::uint64 objectid() const;
-  void set_objectid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 objectid() const;
+  void set_objectid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_objectid() const;
-  void _internal_set_objectid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_objectid() const;
+  void _internal_set_objectid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
   // float x = 2;
@@ -246,7 +246,7 @@ class PositionInfo final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 objectid_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 objectid_;
   float x_;
   float y_;
   float z_;
@@ -387,13 +387,13 @@ class ObjectInfo final :
       ::Protocol::PositionInfo* positioninfo);
   ::Protocol::PositionInfo* unsafe_arena_release_positioninfo();
 
-  // uint64 objectId = 1;
+  // uint32 objectId = 1;
   void clear_objectid();
-  ::PROTOBUF_NAMESPACE_ID::uint64 objectid() const;
-  void set_objectid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 objectid() const;
+  void set_objectid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_objectid() const;
-  void _internal_set_objectid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_objectid() const;
+  void _internal_set_objectid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
   // .Protocol.ObjectType objectType = 2;
@@ -413,7 +413,7 @@ class ObjectInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::Protocol::PositionInfo* positioninfo_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 objectid_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 objectid_;
   int objecttype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
@@ -429,22 +429,22 @@ class ObjectInfo final :
 #endif  // __GNUC__
 // PositionInfo
 
-// uint64 objectId = 1;
+// uint32 objectId = 1;
 inline void PositionInfo::clear_objectid() {
-  objectid_ = uint64_t{0u};
+  objectid_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 PositionInfo::_internal_objectid() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 PositionInfo::_internal_objectid() const {
   return objectid_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 PositionInfo::objectid() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 PositionInfo::objectid() const {
   // @@protoc_insertion_point(field_get:Protocol.PositionInfo.objectId)
   return _internal_objectid();
 }
-inline void PositionInfo::_internal_set_objectid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void PositionInfo::_internal_set_objectid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   objectid_ = value;
 }
-inline void PositionInfo::set_objectid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void PositionInfo::set_objectid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   _internal_set_objectid(value);
   // @@protoc_insertion_point(field_set:Protocol.PositionInfo.objectId)
 }
@@ -553,22 +553,22 @@ inline void PositionInfo::set_state(::Protocol::MoveState value) {
 
 // ObjectInfo
 
-// uint64 objectId = 1;
+// uint32 objectId = 1;
 inline void ObjectInfo::clear_objectid() {
-  objectid_ = uint64_t{0u};
+  objectid_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 ObjectInfo::_internal_objectid() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ObjectInfo::_internal_objectid() const {
   return objectid_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 ObjectInfo::objectid() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint32 ObjectInfo::objectid() const {
   // @@protoc_insertion_point(field_get:Protocol.ObjectInfo.objectId)
   return _internal_objectid();
 }
-inline void ObjectInfo::_internal_set_objectid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void ObjectInfo::_internal_set_objectid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
   objectid_ = value;
 }
-inline void ObjectInfo::set_objectid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void ObjectInfo::set_objectid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   _internal_set_objectid(value);
   // @@protoc_insertion_point(field_set:Protocol.ObjectInfo.objectId)
 }

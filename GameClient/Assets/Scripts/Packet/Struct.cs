@@ -25,10 +25,10 @@ namespace Protocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgxTdHJ1Y3QucHJvdG8SCFByb3RvY29sGgpFbnVtLnByb3RvInIKDFBvc2l0",
-            "aW9uSW5mbxIQCghvYmplY3RJZBgBIAEoBBIJCgF4GAIgASgCEgkKAXkYAyAB",
+            "aW9uSW5mbxIQCghvYmplY3RJZBgBIAEoDRIJCgF4GAIgASgCEgkKAXkYAyAB",
             "KAISCQoBehgEIAEoAhILCgN5YXcYBSABKAISIgoFc3RhdGUYBiABKA4yEy5Q",
             "cm90b2NvbC5Nb3ZlU3RhdGUidgoKT2JqZWN0SW5mbxIQCghvYmplY3RJZBgB",
-            "IAEoBBIoCgpvYmplY3RUeXBlGAIgASgOMhQuUHJvdG9jb2wuT2JqZWN0VHlw",
+            "IAEoDRIoCgpvYmplY3RUeXBlGAIgASgOMhQuUHJvdG9jb2wuT2JqZWN0VHlw",
             "ZRIsCgxwb3NpdGlvbkluZm8YAyABKAsyFi5Qcm90b2NvbC5Qb3NpdGlvbklu",
             "Zm9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
@@ -83,9 +83,9 @@ namespace Protocol {
 
     /// <summary>Field number for the "objectId" field.</summary>
     public const int ObjectIdFieldNumber = 1;
-    private ulong objectId_;
+    private uint objectId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ulong ObjectId {
+    public uint ObjectId {
       get { return objectId_; }
       set {
         objectId_ = value;
@@ -172,7 +172,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (ObjectId != 0UL) hash ^= ObjectId.GetHashCode();
+      if (ObjectId != 0) hash ^= ObjectId.GetHashCode();
       if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
       if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
       if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
@@ -191,9 +191,9 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ObjectId != 0UL) {
+      if (ObjectId != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt64(ObjectId);
+        output.WriteUInt32(ObjectId);
       }
       if (X != 0F) {
         output.WriteRawTag(21);
@@ -223,8 +223,8 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (ObjectId != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ObjectId);
+      if (ObjectId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ObjectId);
       }
       if (X != 0F) {
         size += 1 + 4;
@@ -252,7 +252,7 @@ namespace Protocol {
       if (other == null) {
         return;
       }
-      if (other.ObjectId != 0UL) {
+      if (other.ObjectId != 0) {
         ObjectId = other.ObjectId;
       }
       if (other.X != 0F) {
@@ -282,7 +282,7 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            ObjectId = input.ReadUInt64();
+            ObjectId = input.ReadUInt32();
             break;
           }
           case 21: {
@@ -349,9 +349,9 @@ namespace Protocol {
 
     /// <summary>Field number for the "objectId" field.</summary>
     public const int ObjectIdFieldNumber = 1;
-    private ulong objectId_;
+    private uint objectId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ulong ObjectId {
+    public uint ObjectId {
       get { return objectId_; }
       set {
         objectId_ = value;
@@ -402,7 +402,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (ObjectId != 0UL) hash ^= ObjectId.GetHashCode();
+      if (ObjectId != 0) hash ^= ObjectId.GetHashCode();
       if (ObjectType != global::Protocol.ObjectType.None) hash ^= ObjectType.GetHashCode();
       if (positionInfo_ != null) hash ^= PositionInfo.GetHashCode();
       if (_unknownFields != null) {
@@ -418,9 +418,9 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ObjectId != 0UL) {
+      if (ObjectId != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt64(ObjectId);
+        output.WriteUInt32(ObjectId);
       }
       if (ObjectType != global::Protocol.ObjectType.None) {
         output.WriteRawTag(16);
@@ -438,8 +438,8 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (ObjectId != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ObjectId);
+      if (ObjectId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ObjectId);
       }
       if (ObjectType != global::Protocol.ObjectType.None) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ObjectType);
@@ -458,7 +458,7 @@ namespace Protocol {
       if (other == null) {
         return;
       }
-      if (other.ObjectId != 0UL) {
+      if (other.ObjectId != 0) {
         ObjectId = other.ObjectId;
       }
       if (other.ObjectType != global::Protocol.ObjectType.None) {
@@ -482,7 +482,7 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            ObjectId = input.ReadUInt64();
+            ObjectId = input.ReadUInt32();
             break;
           }
           case 16: {

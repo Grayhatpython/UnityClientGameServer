@@ -7,21 +7,41 @@ using UnityEngine;
 
 public class WorldManager
 {
-    Dictionary<ulong, GameObject> _objects = new Dictionary<ulong, GameObject>();   
+    Dictionary<uint, GameObject> _objects = new Dictionary<uint, GameObject>();   
+    public HeroController Hero { get; set; }
 
-    public void HandleSpawn(ObjectInfo objectInfo)
+    public void HandleSpawn(ObjectInfo objectInfo, bool isHeroPlayer = false)
     {
+        if (Hero != null && Hero.Id == objectInfo.ObjectId)
+            return;
+
         if (_objects.ContainsKey(objectInfo.ObjectId))
             return;
 
-        GameObject go = Managers.Resource.Instantiate("Arissa");
-        go.transform.position = new Vector3(objectInfo.PositionInfo.X, objectInfo.PositionInfo.Y, objectInfo.PositionInfo.Z);
+        GameObject go = null;
+        if (isHeroPlayer)
+        {
+            go = Managers.Resource.Instantiate("Hero");
+            Hero = go.GetComponent<HeroController>();
+            Hero.Id = objectInfo.ObjectId;
+            Hero.PosInfo = objectInfo.PositionInfo;
+            Hero.DestPosInfo = objectInfo.PositionInfo;
+        }
+        else
+        {
+            go = Managers.Resource.Instantiate("Player");
+            PlayerController pc = go.GetComponent<PlayerController>();
+            pc.Id = objectInfo.ObjectId;    
+            pc.PosInfo = objectInfo.PositionInfo;
+            pc.DestPosInfo = objectInfo.PositionInfo;
+        }
+
         _objects.Add(objectInfo.ObjectId, go);
     }
 
     public void HandleSpawn(S_ENTER_GAME enterGamePacket)
     {
-        HandleSpawn(enterGamePacket.Player);
+        HandleSpawn(enterGamePacket.Player, true);
     }
 
     public void HandleSpawn(S_SPAWN spawnPacket)
@@ -32,11 +52,11 @@ public class WorldManager
 
     public void HandleDespawn(S_DESPAWN despawnPacket)
     {
-        foreach(ulong id in despawnPacket.ObjectIds)
+        foreach(uint id in despawnPacket.ObjectIds)
             HandleDespawn(id);  
     }
 
-    public void HandleDespawn(ulong objectId)
+    public void HandleDespawn(uint objectId)
     {
         if (_objects.ContainsKey(objectId) == false)
             return;
@@ -49,6 +69,27 @@ public class WorldManager
 
         _objects.Remove(objectId);
         Managers.Resource.Destroy(go);
+    }
+
+    public void HandleMove(S_MOVE movePacket)
+    {
+        uint objectId = movePacket.PositionInfo.ObjectId;
+        if (_objects.ContainsKey(objectId) == false)
+            return;
+
+        if (Hero.Id == objectId)
+            return;
+
+        GameObject go = null;
+        _objects.TryGetValue(objectId, out go);
+
+        if (go == null)
+            return;
+
+        //  TODO
+        PlayerController pc = go.GetComponent<PlayerController>();
+        pc.DestPosInfo = movePacket.PositionInfo;
+        pc.State = movePacket.PositionInfo.State;
     }
 
     public void Clear()

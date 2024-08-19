@@ -61,6 +61,7 @@ class PacketHandler
         S_MOVE movePacket = packet as S_MOVE;
         ServerSession serverSession = session as ServerSession;
 
+        Managers.World.HandleMove(movePacket);
     }
 
     public static void S_CHAT_PacketHandler(PacketSession session, IMessage packet)

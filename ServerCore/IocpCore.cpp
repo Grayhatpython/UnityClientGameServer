@@ -28,6 +28,9 @@ bool IocpCore::Dispatch(uint32 timeoutMs)
 		OUT reinterpret_cast<LPOVERLAPPED*>(&iocpEvent), timeoutMs))
 	{
 		IocpObjectRef iocpObject = iocpEvent->owner;
+
+		ASSERT_CRASH(iocpObject);
+
 		iocpObject->Dispatch(iocpEvent, numOfBytes);
 	}
 	else

@@ -104,7 +104,7 @@ void Room::Enter(GameObjectRef gameObject)
 	}
 }
 
-void Room::Leave(uint64 gameObjectId)
+void Room::Leave(uint32 gameObjectId)
 {
 	//	인메모리 삭제 과정
 	auto gameObject = _gameObjects.find(gameObjectId);
@@ -150,13 +150,13 @@ void Room::Leave(uint64 gameObjectId)
 
 void Room::Move(Protocol::C_MOVE movePacket)
 {
-	//	TODO : player ID check 
+	//	TODO : player ID check -> 패킷 조작으로 다른 플레이어의 좌표를 무작위로 바꾼다면?
 	const auto objectId = movePacket.positioninfo().objectid();
 	if (_gameObjects.find(objectId) == _gameObjects.end())
 		return;
 
 	auto& gameObject = _gameObjects[objectId];
-	//	TODO : Position Check
+	//	TODO : Position Check : 보낸 좌표가 유효한지?
 	//	Update Position
 	gameObject->_positionInfo->CopyFrom(movePacket.positioninfo());
 
@@ -168,11 +168,11 @@ void Room::Move(Protocol::C_MOVE movePacket)
 		auto sendBuffer = ClientPacketHandler::MakeSendBuffer(moveSendPacket);
 		Broadcast(sendBuffer);
 
-		std::cout << "Move Packet Received" << std::endl;
+		std::cout << "Move Packet Received : " << objectId << std::endl;
 	}
 }
 
-void Room::Broadcast(SendBufferRef sendBuffer, uint64 ignoreId)
+void Room::Broadcast(SendBufferRef sendBuffer, uint32 ignoreId)
 {
 	for (auto& gameObject : _gameObjects)
 	{
@@ -197,7 +197,7 @@ void Room::Broadcast(SendBufferRef sendBuffer, uint64 ignoreId)
 void Room::Update()
 {
 	//	Packet handle Processing per frame
-	Execute(true);
+	PopAllExecute();
 }
 
 

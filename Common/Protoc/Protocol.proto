@@ -22,7 +22,7 @@ message S_LOGIN
 
 message C_ENTER_GAME
 {
-	uint64 playerIndex = 1;
+	uint32 playerIndex = 1;
 }
 
 message S_ENTER_GAME
@@ -49,7 +49,7 @@ message S_SPAWN
 
 message S_DESPAWN
 {
-	repeated uint64 objectIds = 1;
+	repeated uint32 objectIds = 1;
 }
 
 message C_MOVE
@@ -69,7 +69,7 @@ message C_CHAT
 
 message S_CHAT
 {
-	uint64 playerId = 1;
+	uint32 playerId = 1;
 	string msg = 2;
 }
 

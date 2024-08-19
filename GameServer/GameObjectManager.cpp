@@ -4,7 +4,7 @@
 #include "Room.h"
 #include "Player.h"
 
-Atomic<uint64> GameObjectManager::S_autoincrementId = 1;
+Atomic<uint32> GameObjectManager::S_autoincrementId = 1;
 
 PlayerRef GameObjectManager::CreatePlayer(ClientSessionRef session)
 {

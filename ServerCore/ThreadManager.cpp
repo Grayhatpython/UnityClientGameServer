@@ -75,7 +75,7 @@ void ThreadManager::DoGlobalJobQueueExecute()
 			break;
 
 		//	그 대기중인 JobQueue를 처리한다.
-		jobQueue->Execute();
+		jobQueue->ScheduleTimeExecute();
 	}
 }
 
@@ -84,7 +84,7 @@ void ThreadManager::DistributeReserveJobs()
 {
 	const uint64 now = ::GetTickCount64();
 
-	GJobTimer->Distribute(now);
+	//GJobTimer->Distribute(now);
 }
 
 void ThreadManager::Close()

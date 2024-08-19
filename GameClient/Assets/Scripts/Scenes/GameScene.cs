@@ -10,7 +10,6 @@ public class GameScene : BaseScene
 
     }
 
-    Coroutine co;
     protected override void Initialize()
     {
         

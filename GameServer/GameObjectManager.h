@@ -6,6 +6,6 @@ public:
 	static PlayerRef CreatePlayer(ClientSessionRef session);
 
 private:
-	static Atomic<uint64> S_autoincrementId;
+	static Atomic<uint32> S_autoincrementId;
 };
 
