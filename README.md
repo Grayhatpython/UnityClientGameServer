@@ -12,7 +12,7 @@ DB : MSSQL
 
 - - - - - - - - - - - - - - - - - -
 
-https://github.com/user-attachments/assets/94d008f4-f9c0-4bb6-bc30-9cd9be55adc0
+https://github.com/user-attachments/assets/a025f1af-1f64-488c-9cc6-43528d680cab
 
 - 위치 동기화 싱크가 안맞는 경우가 발생한다... -
 
