@@ -11,6 +11,11 @@ public:
 	virtual ~Player();
 
 public:
+	enum { ClassId = 'PLAY' };
+	virtual uint32 GetClassId() const { return ClassId; }
+	static PlayerRef CreateInstance() { return MakeShared<Player>(); }
+
+public:
 	ClientSessionRef			_ownerSession;
 };
 

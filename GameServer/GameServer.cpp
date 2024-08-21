@@ -7,6 +7,7 @@
 #include "Room.h"
 #include "ClientSessionManager.h"
 #include "Monitoring.h"
+#include "GameObjectManager.h"
 
 GameServer::~GameServer()
 {
@@ -18,6 +19,8 @@ bool GameServer::Initialize()
 	ClientPacketHandler::Initialize();
 
 	GClientSessionManager = new ClientSessionManager();
+	GGameObjectManager = new GameObjectManager();
+	GGameObjectManager->Initialize();
 	GRoom = make_shared<Room>();
 
 	_service = MakeShared<ServerService>(
@@ -89,6 +92,9 @@ void GameServer::DoProcessJob()
 void GameServer::Close()
 {
 	_stopped = true;
+
+	delete GGameObjectManager;
+	GGameObjectManager = nullptr;
 
 	_service->CloseService();
 	GSendBufferManager->Close();

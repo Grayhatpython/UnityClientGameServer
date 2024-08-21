@@ -12,5 +12,7 @@
 
 #include "CorePch.h"
 #include "Enum.pb.h"
+#include "Struct.pb.h"
 
 using ClientSessionRef = std::shared_ptr<class ClientSession>;
+using PlayerRef = std::shared_ptr<class Player>;

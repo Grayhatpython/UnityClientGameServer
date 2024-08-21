@@ -6,6 +6,7 @@
 #include "DBBind.h"
 #include "DBConnectionPool.h"
 #include "Exception.h"
+
 GameServer* gameServer;
 
 //BOOL CtrlHandler(DWORD CtrlType)

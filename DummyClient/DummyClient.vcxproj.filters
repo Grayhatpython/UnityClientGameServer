@@ -13,6 +13,9 @@
     <Filter Include="Network">
       <UniqueIdentifier>{5a1fe2c9-ea85-40c1-bd9c-e7373ded24cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameContents">
+      <UniqueIdentifier>{a78fea39-3d49-4837-9f72-9f579d7f7882}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -36,6 +39,12 @@
     <ClCompile Include="ServerSession.cpp">
       <Filter>Network</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameContents</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerSessionManager.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -54,6 +63,12 @@
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="ServerPacketHandler.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameContents</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSessionManager.h">
       <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>

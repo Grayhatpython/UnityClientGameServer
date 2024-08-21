@@ -7,6 +7,9 @@ public:
 	virtual ~GameObject();
 
 public:
+	enum { ClassId = 'GAME' };
+	virtual uint32 GetClassId() const { return ClassId; }
+	static GameObjectRef CreateInstance() { return MakeShared<GameObject>(); }
 
 public:
 	bool					_isPlayer = false;

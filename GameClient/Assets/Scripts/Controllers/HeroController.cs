@@ -37,31 +37,8 @@ public class HeroController : PlayerController
     protected override void UpdateController()
     {
         UpdateInput();
-
         base.UpdateController();
-
-        bool focreMovePacketSend = false;
-
-        if(_prevMoveInput != _moveInput)
-        {
-            focreMovePacketSend = true;
-            _prevMoveInput = _moveInput;
-        }
-
-        _calcMovePacketSendTime -= Time.deltaTime;
-
-        if(_calcMovePacketSendTime <= 0 || focreMovePacketSend)
-        {
-            _calcMovePacketSendTime = MOVE_PACKET_SEND_TICK;
-
-            C_MOVE movePacket = new C_MOVE();
-            movePacket.PositionInfo = PosInfo;
-            movePacket.PositionInfo.ObjectId = Id;
-            movePacket.PositionInfo.State = State;
-            movePacket.PositionInfo.Yaw = _desiredYaw;
-            Managers.Network.Send(movePacket);
-        }
-
+        UpdateMovePacket();
     }
 
     protected override void UpdateIdle()
@@ -100,6 +77,31 @@ public class HeroController : PlayerController
             State = MoveState.Run;
         else
             State = MoveState.Idle;
+    }
+
+    private void UpdateMovePacket()
+    {
+        bool focreMovePacketSend = false;
+
+        if (_prevMoveInput != _moveInput)
+        {
+            focreMovePacketSend = true;
+            _prevMoveInput = _moveInput;
+        }
+
+        _calcMovePacketSendTime -= Time.deltaTime;
+
+        if (_calcMovePacketSendTime <= 0 || focreMovePacketSend)
+        {
+            _calcMovePacketSendTime = MOVE_PACKET_SEND_TICK;
+
+            C_MOVE movePacket = new C_MOVE();
+            movePacket.PositionInfo = PosInfo;
+            movePacket.PositionInfo.ObjectId = Id;
+            movePacket.PositionInfo.State = State;
+            movePacket.PositionInfo.Yaw = _desiredYaw;
+            Managers.Network.Send(movePacket);
+        }
     }
 
     #endregion

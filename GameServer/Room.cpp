@@ -30,9 +30,9 @@ void Room::Enter(GameObjectRef gameObject)
 		//player->_room.store(GetRoomRef());
 		gameObject->_room = GetRoomRef();
 
-		gameObject->_positionInfo->set_x(Utils::GetRandom(-25.f, 25.f));
+		gameObject->_positionInfo->set_x(Utils::GetRandom(-35.f, 35.f));
 		gameObject->_positionInfo->set_y(0);
-		gameObject->_positionInfo->set_z(Utils::GetRandom(-25.f, 25.f));
+		gameObject->_positionInfo->set_z(Utils::GetRandom(-35.f, 35.f));
 		gameObject->_positionInfo->set_yaw(Utils::GetRandom(0.f, 100.f));
 		successd = true;
 	}

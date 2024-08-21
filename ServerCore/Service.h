@@ -31,15 +31,6 @@ public:
 	int32				GetMaxSessionCount() { return _maxSessionCount; }
 
 public:
-	//	TEMP
-	void				Broadcast(SendBufferRef sendBuffer)
-	{
-		WRITE_LOCK;
-		for (const auto& session : _sessions)
-			session->Send(sendBuffer);
-	}
-
-public:
 	ServiceType			GetServiceType() { return _type; }
 	NetAddress			GetNetAddress() { return _netAddress; }
 	IocpCoreRef&		GetIocpCore() { return _iocpCore; }

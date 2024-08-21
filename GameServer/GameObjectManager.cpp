@@ -3,19 +3,26 @@
 #include "ClientSession.h"
 #include "Room.h"
 #include "Player.h"
+#include "Monster.h"
 
-Atomic<uint32> GameObjectManager::S_autoincrementId = 1;
+GameObjectManager* GGameObjectManager = nullptr;
 
-PlayerRef GameObjectManager::CreatePlayer(ClientSessionRef session)
+void GameObjectManager::Initialize()
 {
-	const auto id = S_autoincrementId.fetch_add(1);
+	RegisterGameObjectCreateFunc<GameObject>();
+	RegisterGameObjectCreateFunc<Monster>();
+	RegisterGameObjectCreateFunc<Player>();
+}
 
-	auto player = MakeShared<Player>();
-	player->_objectInfo->set_objectid(id);
-	player->_positionInfo->set_objectid(id);
-	player->_ownerSession = session;
-	//session->_player.store(player);
-	session->_player = player;
+GameObjectRef GameObjectManager::Create(uint32 classId)
+{
+	const auto id = autoincrementGameObjectId.fetch_add(1);
 
-	return player;
+	auto createFunc = _gameObjectCreateFuncMap[classId];
+	auto gameObject = createFunc();
+
+	gameObject->_objectInfo->set_objectid(id);
+	gameObject->_positionInfo->set_objectid(id);
+
+	return gameObject;
 }

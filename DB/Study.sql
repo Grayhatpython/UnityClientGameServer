@@ -783,3 +783,36 @@ WHERE A.departmentId = 2
 --  ALTER TABLE [테이블명] DROP CONSTRAINT [FOREIGN KEY명]
 
 ALTER TABLE TestDepartment ADD CONSTRAINT Department_Company_FK FOREIGN KEY (CompanyId) REFERENCES Company(CompanyId);
+
+-- M:N 관계
+-- 비지니스 관계?
+-- 학생 <-> 과목 PK 중복 발생
+-- 학생 과목은 관계가 없는 별개의 테이블이다. 마스터 테이블
+-- 학생 과목 수강 
+-- 하나의 테이블은 하나의 객체나 사물을 모델링!
+-- 관계를 유심히
+
+
+CREATE TABLE 서고 (
+	서고id int PRIMARY KEY NOT NULL,
+)
+
+CREATE TABLE 서가 (
+	서가id int PRIMARY KEY NOT NULL,
+	서고id int 
+)
+
+ALTER TABLE 서가 ADD CONSTRAINT 서가_서고_FK FOREIGN KEY (서고id) REFERENCES 서고(서고id);
+
+CREATE TABLE 책 (
+	책id int PRIMARY KEY NOT NULL,
+)
+
+CREATE TABLE 고객 (
+	고객id int PRIMARY KEY NOT NULL,
+	고객명 NVARCHAR(50) NOT NULL
+)
+
+CREATE TABLE 도서목록 (
+	도서목록id int PRIMARY KEY NOT NULL,
+)

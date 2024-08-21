@@ -59,7 +59,7 @@ public class NetworkManager
             ServerPacketHandler.Instance.HandlePacket(_session, packet.Message, packet.Id);
 
         //TEMP
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.F1))
         {
             C_LEAVE_GAME leaveGamePacket = new C_LEAVE_GAME();
             Send(leaveGamePacket);

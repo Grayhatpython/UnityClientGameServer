@@ -7,7 +7,5 @@ public:
 	Creature();
 	virtual ~Creature();
 
-public:
-
 };
 

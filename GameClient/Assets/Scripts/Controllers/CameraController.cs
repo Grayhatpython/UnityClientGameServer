@@ -17,8 +17,8 @@ public class CameraController : MonoBehaviour
 
     Vector2     _moveDelta = new Vector2(0f, 10f);
 
-    float       _smoothTime = 0.3f;
-    Vector3     _velocity = Vector3.zero;
+    //float       _smoothTime = 0.3f;
+    //Vector3     _velocity = Vector3.zero;
 
     void Update()
     {
@@ -53,10 +53,10 @@ public class CameraController : MonoBehaviour
         Vector3 direction = new Vector3(0, 0, -_distance);
         Vector3 position = Target.transform.position + rotation * direction;
 
-        transform.position = Vector3.SmoothDamp(transform.position, position, ref _velocity, _smoothTime);
+        //transform.position = Vector3.SmoothDamp(transform.position, position, ref _velocity, _smoothTime);
 
         // 카메라 위치와 회전을 설정
-        //transform.position = position;
+        transform.position = position;
         transform.LookAt(Target.transform.position);
     }
 }

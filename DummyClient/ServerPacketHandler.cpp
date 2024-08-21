@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ServerPacketHandler.h"
-#include "BufferReader.h"
 #include "ServerSession.h"
+#include "Player.h"
 
 PacketProcessingFunction GPacketPacketProcessingFunction[UINT16_MAX];
 
@@ -10,59 +10,56 @@ bool Packet_Processing_Function_Undefined(std::shared_ptr<PacketSession>& sessio
 	return true;
 }
 
-/*
-//	사실 session은 현재 서버임
 bool S_LOGIN_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_LOGIN& packet)
 {
-	if (packet.success() == false)
-		return false;
+	auto serverSession = static_pointer_cast<ServerSession>(session);
 
-	if (packet.players().size() == 0)
-	{
-		//	캐릭터 생성
-	}
-
-	//	입장 UI 버튼 -> 게임 입장 
 	Protocol::C_ENTER_GAME enterGamePacket;
-	enterGamePacket.set_playerindex(0);	//	현재 무조건 첫번째 캐릭터 입장
+	enterGamePacket.set_playerindex(0);
 	auto sendBuffer = ServerPacketHandler::MakeSendBuffer(enterGamePacket);
-	session->Send(sendBuffer);
+	serverSession->Send(sendBuffer);
 
 	return true;
 }
 
 bool S_ENTER_GAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_ENTER_GAME& packet)
 {
-	if (packet.success() == false)
-		return false;
+	//	플레이어 생성
+	auto serverSession = static_pointer_cast<ServerSession>(session);
+	const auto& player = packet.player();
 
+	serverSession->_player = MakeShared<Player>();
+	serverSession->_player->_id = player.objectid();
+	serverSession->_player->_positionInfo->CopyFrom(player.positioninfo());
 
+	return true;
+}
+
+bool S_LEAVE_GAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_LEAVE_GAME& packet)
+{
+	auto serverSession = static_pointer_cast<ServerSession>(session);
+
+	return true;
+}
+
+bool S_SPAWN_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_SPAWN& packet)
+{
+	auto serverSession = static_pointer_cast<ServerSession>(session);
+
+	return true;
+}
+
+bool S_DESPAWN_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_DESPAWN& packet)
+{
+	return true;
+}
+
+bool S_MOVE_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_MOVE& packet)
+{
 	return true;
 }
 
 bool S_CHAT_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_CHAT& packet)
-{
-	cout << packet.msg() << endl;
-	return true;
-}
-*/
-
-bool S_BROADCASTENTERGAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_BROADCASTENTERGAME& packet)
-{
-	return true;
-}
-
-bool S_BROADCASTLEAVEGAME_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_BROADCASTLEAVEGAME& packet)
-{
-	return true;
-}
-
-bool S_PLAYERLIST_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_PLAYERLIST& packet)
-{
-	return true;
-}
-
-bool S_BROADCASTMOVE_Packet_Processing_Function(std::shared_ptr<PacketSession>& session, Protocol::S_BROADCASTMOVE& packet)
 {
 	return true;
 }
