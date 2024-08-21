@@ -12,9 +12,9 @@ DB : MSSQL
 
 - - - - - - - - - - - - - - - - - -
 
-https://github.com/user-attachments/assets/a025f1af-1f64-488c-9cc6-43528d680cab
+https://github.com/user-attachments/assets/9a6036a2-b635-4800-8c90-10215c9085d0
 
-- 위치 동기화 싱크가 안맞는 경우가 발생한다... -
+- 더미 클라이언트 이동 테스트
 
 
  - - - - - - - - - - - -
