@@ -19,7 +19,7 @@ public class MapEditor
         if (go == null)
             return;
 
-        World world = go.GetComponent<World>();
+        WorldController world = go.GetComponent<WorldController>();
 
         if (world == null)
             return;
@@ -28,19 +28,19 @@ public class MapEditor
 
         using (var writer = File.CreateText("Assets/Resources/Map/map.txt"))
         {
-            writer.WriteLine(world.nodeSize);
+            writer.WriteLine(world._nodeSize);
             writer.WriteLine(world.GridSizeX);
             writer.WriteLine(world.GridSizeY);
-            writer.WriteLine(world.Grid[0, 0].position.x);
-            writer.WriteLine(world.Grid[0, world.GridSizeX - 1].position.x);
-            writer.WriteLine(world.Grid[0, 0].position.z);
-            writer.WriteLine(world.Grid[world.GridSizeY - 1, 0].position.z);
+            writer.WriteLine(world.Grid[0, 0]._position.x);
+            writer.WriteLine(world.Grid[0, world.GridSizeX - 1]._position.x);
+            writer.WriteLine(world.Grid[0, 0]._position.z);
+            writer.WriteLine(world.Grid[world.GridSizeY - 1, 0]._position.z);
 
             for(int y = world.GridSizeY - 1; y >= 0; y--)
             {
                 for(int x = 0; x < world.GridSizeX; x++)
                 {
-                    bool isWalkable = world.Grid[y, x].isWalkable;
+                    bool isWalkable = world.Grid[y, x]._isWalkable;
                     if (isWalkable)
                         writer.Write("0");
                     else

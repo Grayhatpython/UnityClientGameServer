@@ -30,7 +30,7 @@ class PacketHandler
         S_ENTER_GAME enterGamePacket = packet as S_ENTER_GAME;
         ServerSession serverSession = session as ServerSession;
 
-        Managers.World.HandleSpawn(enterGamePacket);
+        Managers.Object.HandleSpawn(enterGamePacket);
     }
 
     public static void S_LEAVE_GAME_PacketHandler(PacketSession session, IMessage packet)
@@ -38,7 +38,7 @@ class PacketHandler
         S_LEAVE_GAME leaveGamePacket = packet as S_LEAVE_GAME;
         ServerSession serverSession = session as ServerSession;
 
-        Managers.World.Clear();
+        Managers.Object.Clear();
     }
 
     public static void S_SPAWN_PacketHandler(PacketSession session, IMessage packet)
@@ -46,14 +46,14 @@ class PacketHandler
         S_SPAWN spawnPacket = packet as S_SPAWN;
         ServerSession serverSession = session as ServerSession;
 
-        Managers.World.HandleSpawn(spawnPacket);
+        Managers.Object.HandleSpawn(spawnPacket);
     }
     public static void S_DESPAWN_PacketHandler(PacketSession session, IMessage packet)
     {
         S_DESPAWN despawnPacket = packet as S_DESPAWN;
         ServerSession serverSession = session as ServerSession;
 
-        Managers.World.HandleDespawn(despawnPacket);
+        Managers.Object.HandleDespawn(despawnPacket);
     }
 
     public static void S_MOVE_PacketHandler(PacketSession session, IMessage packet)
@@ -61,7 +61,7 @@ class PacketHandler
         S_MOVE movePacket = packet as S_MOVE;
         ServerSession serverSession = session as ServerSession;
 
-        Managers.World.HandleMove(movePacket);
+        Managers.Object.HandleMove(movePacket);
     }
 
     public static void S_CHAT_PacketHandler(PacketSession session, IMessage packet)

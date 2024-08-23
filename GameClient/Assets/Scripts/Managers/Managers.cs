@@ -8,7 +8,7 @@ public class Managers : MonoBehaviour
     static Managers s_instance;
     static Managers Instance { get { Initialize();  return s_instance; } }
 
-    WorldManager _world = new WorldManager();
+    GameObjectManager _object = new GameObjectManager();
 
     NetworkManager _network = new NetworkManager();
     DataManager _data = new DataManager();
@@ -18,7 +18,7 @@ public class Managers : MonoBehaviour
     SceneManagerEx   _scene = new SceneManagerEx();
     SoundManager   _sound = new SoundManager();
 
-    public static WorldManager World { get { return Instance._world; } }
+    public static GameObjectManager Object { get { return Instance._object; } }
     public static NetworkManager Network { get { return Instance._network; } }
     public static DataManager Data { get { return Instance._data; } }
     public static PoolManager Pool { get { return Instance._pool; } }

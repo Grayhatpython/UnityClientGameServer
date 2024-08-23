@@ -816,3 +816,25 @@ CREATE TABLE 고객 (
 CREATE TABLE 도서목록 (
 	도서목록id int PRIMARY KEY NOT NULL,
 )
+
+use 성적관리;
+ 
+SELECT * FROM TB_SchoolGrade;
+SELECT * FROM TB_SchoolClass;
+
+INSERT INTO TB_SchoolGrade VALUES(1, '1학년'), (2, '2학년'), (3, '3학년');
+
+CREATE PROCEDURE SP_Insert_SchoolClass
+	@SchoolGradeId Tinyint,
+	@SchoolClassId Tinyint,
+	@SchoolClassName varchar(50)
+AS
+BEGIN
+	SET NOCOUNT ON
+	INSERT INTO TB_SchoolClass (SchoolGradeId, SchoolClassId, SchoolClassName)
+	VALUES(@SchoolGradeId, @SchoolClassId, @SchoolClassName);
+END
+GO
+
+EXEC SP_Insert_SchoolClass 3, 3, '3반'
+

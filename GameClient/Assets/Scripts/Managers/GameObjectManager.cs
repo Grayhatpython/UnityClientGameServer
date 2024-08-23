@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldManager
+public class GameObjectManager
 {
     Dictionary<uint, GameObject> _objects = new Dictionary<uint, GameObject>();   
     public HeroController Hero { get; set; }

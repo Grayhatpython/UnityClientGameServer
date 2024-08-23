@@ -5,23 +5,22 @@ using UnityEngine;
 
 [Serializable]
 public class Node : IComparable<Node>
-{
+{   
+    public bool     _isWalkable;
+    public Vector3  _position;
+    public int      _gridX;
+    public int      _gridY;
 
-    public bool isWalkable;
-    public Vector3 position;
-    public int gridX;
-    public int gridY;
-
-    public int gCost;
-    public int hCost;
-    public Node parent;
+    public int      _gCost;
+    public int      _hCost;
+    public Node     _parent;
 
     public Node(bool walkable, Vector3 position, int gridX, int gridY)
     {
-        this.isWalkable = walkable;
-        this.position = position;
-        this.gridX = gridX;
-        this.gridY = gridY;
+        this._isWalkable = walkable;
+        this._position = position;
+        this._gridX = gridX;
+        this._gridY = gridY;
     }
 
     public int CompareTo(Node otherNode)
@@ -35,7 +34,7 @@ public class Node : IComparable<Node>
     {
         get
         {
-            return gCost + hCost;
+            return _gCost + _hCost;
         }
     }
 }

@@ -4,31 +4,17 @@ using UnityEngine;
 
 public class PathFinding : MonoBehaviour
 {
-    public Transform start, destination;
+    WorldController _world;
 
-    private Vector3 cacheStart, cacheDest;
-    private World world;
-
-    void Awake()
+    private void Start()
     {
-        world = GetComponent<World>();
+        _world = GetComponent<WorldController>();
     }
 
-    void Update()
+    public void FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        if (start.position != cacheStart || destination.position != cacheDest)
-        {
-            FindPath(start.position, destination.position);
-
-            cacheStart = start.position;
-            cacheDest = destination.position;
-        }
-    }
-
-    void FindPath(Vector3 startPos, Vector3 targetPos)
-    {
-        Node startNode = world.GetNodeFromPosition(startPos);
-        Node targetNode = world.GetNodeFromPosition(targetPos);
+        Node startNode = _world.GetNodeFromPosition(startPos);
+        Node targetNode = _world.GetNodeFromPosition(targetPos);
 
         List<Node> openSet = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
@@ -40,7 +26,7 @@ public class PathFinding : MonoBehaviour
             Node currentNode = openSet[0];
             for (int i = 1; i < openSet.Count; i++)
             {
-                if (openSet[i].fCost < currentNode.fCost || (openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost))
+                if (openSet[i].fCost < currentNode.fCost || (openSet[i].fCost == currentNode.fCost && openSet[i]._hCost < currentNode._hCost))
                 {
                     currentNode = openSet[i];
                 }
@@ -61,31 +47,31 @@ public class PathFinding : MonoBehaviour
             #endregion
 
             #region 이웃노드를 가져와서 값을 계산한 후 오픈 셋에 추가한다.
-            foreach (Node n in world.GetNeighbours(currentNode))
+            foreach (Node n in _world.GetNeighbours(currentNode))
             {
-                if (!n.isWalkable || closedSet.Contains(n))
+                if (!n._isWalkable || closedSet.Contains(n))
                 {
                     continue;
                 }
 
-                int g = currentNode.gCost + GetDistance(currentNode, n);
+                int g = currentNode._gCost + GetDistance(currentNode, n);
                 int h = GetDistance(n, targetNode);
                 int f = g + h;
 
                 // 오픈 셋에 이미 중복 노드가 있는 경우 값이 작은 쪽으로 변경한다.
                 if (!openSet.Contains(n))
                 {
-                    n.gCost = g;
-                    n.hCost = h;
-                    n.parent = currentNode;
+                    n._gCost = g;
+                    n._hCost = h;
+                    n._parent = currentNode;
                     openSet.Add(n);
                 }
                 else
                 {
                     if (n.fCost > f)
                     {
-                        n.gCost = g;
-                        n.parent = currentNode;
+                        n._gCost = g;
+                        n._parent = currentNode;
                     }
                 }
             }
@@ -101,17 +87,17 @@ public class PathFinding : MonoBehaviour
         while (currentNode != startNode)
         {
             path.Add(currentNode);
-            currentNode = currentNode.parent;
+            currentNode = currentNode._parent;
         }
 
         path.Reverse();
-        world.path = path;
+        _world.Path = path;
     }
 
     int GetDistance(Node nodeA, Node nodeB)
     {
-        int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
-        int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
+        int dstX = Mathf.Abs(nodeA._gridX - nodeB._gridX);
+        int dstY = Mathf.Abs(nodeA._gridY - nodeB._gridY);
 
         if (dstX > dstY)
         {
@@ -120,4 +106,5 @@ public class PathFinding : MonoBehaviour
 
         return 14 * dstX + 10 * (dstY - dstX);
     }
+
 }
