@@ -838,3 +838,21 @@ GO
 
 EXEC SP_Insert_SchoolClass 3, 3, '3반'
 
+USE designDB;
+
+SELECT * FROM 신랑
+SELECT * FROM 신부
+SELECT * FROM 부부
+INSERT INTO 신부 VALUES(1, '어우동', NULL),(2,'황진이',NULL)
+
+UPDATE 신랑 SET 신랑명 = '박길동' WHERE 신랑id = 3;
+UPDATE 신부 SET 신랑ID = 3 WHERE 신부id = 1;
+UPDATE 신랑 SET 신부ID = 1 WHERE 신랑id = 3;
+
+SELECT * FROM 신랑 AS A
+FULL OUTER JOIN 신부 AS B ON A.신랑id = B.신랑id
+
+INSERT INTO 부부 VALUES(1, '홍길동', '어우동'),(2, '김길동', '황진이')
+
+SELECT A.신랑id 신랑신부id, a.신랑명, b.신부명
+from 신랑1 a join 신부1 b on a.신랑id = b.신부id

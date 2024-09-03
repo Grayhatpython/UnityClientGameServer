@@ -17,7 +17,7 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Game;
 
-        Dictionary<int, Stat> dict = Managers.Data.StatDict;
+        Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
 
         //Managers.Network.Start();
 

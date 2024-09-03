@@ -17,13 +17,25 @@ public class HeroController : PlayerController
 
     const float MOVE_PACKET_SEND_TICK = 0.2f;
     float _calcMovePacketSendTime = MOVE_PACKET_SEND_TICK;
-    
+
+    //  TEMP
+    bool _skillInput = false;
+    float _skillRange = 1f;
 
     private void Awake()
     {
+        InputInitialize();
+    }
+
+    private void InputInitialize()
+    {
         _inputController = new PlayerInputController();
+
         _inputController.Character.Movement.performed += context => _moveInput = context.ReadValue<Vector2>();
-        _inputController.Character.Movement.canceled += context => _moveInput = Vector2.zero;       
+        _inputController.Character.Movement.canceled += context => _moveInput = Vector2.zero;
+
+        _inputController.Character.Attack.performed += context => _skillInput = context.ReadValueAsButton();
+        _inputController.Character.Attack.canceled += context => _skillInput = false;
     }
 
     protected override void Initialize()
@@ -39,6 +51,11 @@ public class HeroController : PlayerController
         UpdateInput();
         base.UpdateController();
         UpdateMovePacket();
+
+        //  Draw Ray Debug
+        Vector3 origin = transform.position + Vector3.up;
+        Vector3 direction = transform.forward;
+        Debug.DrawRay(origin, direction * _skillRange, Color.red);
     }
 
     protected override void UpdateIdle()
@@ -50,7 +67,7 @@ public class HeroController : PlayerController
     {
         Vector3 targetPosition = transform.position + _moveDirection;
         targetPosition.y = 0;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _stat.MoveSpeed * Time.deltaTime);
 
         Quaternion rotate = Quaternion.LookRotation(_moveDirection);
         _desiredYaw = rotate.eulerAngles.y;
@@ -61,8 +78,46 @@ public class HeroController : PlayerController
         //_characterController.Move(_moveDirection * _moveSpeed * Time.deltaTime);
     }
 
+    Coroutine _coSkillCooldown = null;
+
+    protected override void UpdateSkill()
+    {
+        
+    }
+
+    IEnumerator CoSkillAttack(float waitTime)
+    {
+        //  TEST
+        RaycastHit hit;
+
+        Vector3 origin = transform.position + Vector3.up;
+        Vector3 direction = transform.forward;
+        if (Physics.Raycast(origin, direction, out hit, _skillRange, 1 << (int)Define.Layer.Monster))
+        {
+            Debug.Log("fdsf");
+        }
+
+        yield return new WaitForSeconds(waitTime);
+        _coSkillCooldown = null;
+
+        State = MoveState.Idle;
+    }
+
     private void UpdateInput()
     {
+        if (State == MoveState.Skill)
+            return;
+
+        //  TEMP
+        if (_coSkillCooldown == null && _skillInput)
+        {
+            //  음.. 서버 허락받고 쓸지 바로 쓸지 고민
+            State = MoveState.Skill;
+
+            _coSkillCooldown = StartCoroutine("CoSkillAttack", 0.5f); 
+            return;
+        }
+
         Vector3 forward = Camera.main.transform.forward;    
         Vector3 right = Camera.main.transform.right;
         forward.y = 0;

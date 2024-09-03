@@ -6,9 +6,25 @@ public class PathFinding : MonoBehaviour
 {
     WorldController _world;
 
-    private void Start()
+    public Transform _start;
+    public Transform _destination;
+    private Vector3 _cacheStart;
+    private Vector3 _cacheDest;
+
+    private void Awake()
     {
         _world = GetComponent<WorldController>();
+    }
+
+    void Update()
+    {
+        if (_start.position != _cacheStart || _destination.position != _cacheDest)
+        {
+            FindPath(_start.position, _destination.position);
+
+            _cacheStart = _start.position;
+            _cacheDest = _destination.position;
+        }
     }
 
     public void FindPath(Vector3 startPos, Vector3 targetPos)

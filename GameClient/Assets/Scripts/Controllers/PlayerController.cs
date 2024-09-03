@@ -1,5 +1,6 @@
 using Google.Protobuf.WellKnownTypes;
 using Protocol;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,10 +9,11 @@ public class PlayerController : MonoBehaviour
 {
     public uint Id { get; set; }
 
-    protected Animator  _animator;
-    protected float     _moveSpeed = 5f;
+    protected Animator      _animator;
+    protected PlayerStat    _stat; 
 
-    PositionInfo _positionInfo = new PositionInfo();
+    PositionInfo        _positionInfo = new PositionInfo();
+
     public PositionInfo PosInfo
     {
         get { return _positionInfo; }
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
     protected virtual void Initialize()
     {
         _animator = GetComponent<Animator>();   
+        _stat = GetComponent<PlayerStat>();
     }
 
     #region Update
@@ -86,8 +89,11 @@ public class PlayerController : MonoBehaviour
             case MoveState.Run:
                 UpdateMove();
                 break;
+            case MoveState.Skill:
+                UpdateSkill();
+                break;
         }
-  }
+    }
 
     protected virtual void UpdateIdle()
     {
@@ -103,9 +109,14 @@ public class PlayerController : MonoBehaviour
         Vector3 forward = destRotation * Vector3.forward;
         Vector3 targetPosition = transform.position + forward;
         targetPosition.y = 0;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, _stat.MoveSpeed * Time.deltaTime);
    
         //  목적지까지 도착하지 못했다면..?
+    }
+
+    protected virtual void UpdateSkill()
+    {
+
     }
 
     #endregion

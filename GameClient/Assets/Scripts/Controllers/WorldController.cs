@@ -3,24 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldController : MonoBehaviour
-{ 
+{
+    public Transform _player;
     public LayerMask _unwalkableMask;
     public Vector2 _numberOfGrids;
     public float _nodeSize;
     Node[,] _grid;
-
-    public Transform _start; 
-    public Transform _destination;
-    private Vector3  _cacheStart;
-    private Vector3  _cacheDest;
 
     float   _nodeHalfSize;
     int     _gridSizeX;
     int     _gridSizeY;
 
     List<Node> _path;
-
-    PathFinding _pathFinding;
 
     public List<Node> Path
     {
@@ -62,7 +56,7 @@ public class WorldController : MonoBehaviour
 
     private void Start()
     {
-        _pathFinding = GetComponent<PathFinding>(); 
+
     }
 
     public void CreateGrid()
@@ -87,17 +81,6 @@ public class WorldController : MonoBehaviour
 
     }
 
-
-    void Update()
-    {
-        if (_start.position != _cacheStart || _destination.position != _cacheDest)
-        {
-            _pathFinding.FindPath( _start.position, _destination.position );
-
-            _cacheStart = _start.position;
-            _cacheDest = _destination.position;
-        }
-    }
 
     public List<Node> GetNeighbours(Node node)
     {
@@ -142,7 +125,7 @@ public class WorldController : MonoBehaviour
 
         if (_grid != null)
         {
-            Node playernode = GetNodeFromPosition(_start.position);
+            Node playernode = GetNodeFromPosition(_player.position);
 
             foreach (Node n in _grid)
             {
