@@ -8,6 +8,8 @@
 #include "ClientSessionManager.h"
 #include "Monitoring.h"
 #include "GameObjectManager.h"
+#include "WorldManager.h"
+#include "DataManager.h"
 
 GameServer::~GameServer()
 {
@@ -19,8 +21,15 @@ bool GameServer::Initialize()
 	ClientPacketHandler::Initialize();
 
 	GClientSessionManager = new ClientSessionManager();
+	
 	GGameObjectManager = new GameObjectManager();
 	GGameObjectManager->Initialize();
+
+	GDataManager = new DataManager();
+	GDataManager->LoadData();
+
+	GWorldManager = new WorldManager();
+
 	GRoom = make_shared<Room>();
 
 	_service = MakeShared<ServerService>(
@@ -95,6 +104,12 @@ void GameServer::Close()
 
 	delete GGameObjectManager;
 	GGameObjectManager = nullptr;
+
+	delete GDataManager;
+	GDataManager = nullptr;
+
+	delete GWorldManager;
+	GWorldManager = nullptr; 
 
 	_service->CloseService();
 	GSendBufferManager->Close();

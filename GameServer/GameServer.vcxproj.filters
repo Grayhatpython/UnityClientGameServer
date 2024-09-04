@@ -66,6 +66,12 @@
     <ClCompile Include="Monster.cpp">
       <Filter>GameContents</Filter>
     </ClCompile>
+    <ClCompile Include="WorldManager.cpp">
+      <Filter>GameContents</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManager.cpp">
+      <Filter>GameContents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -108,6 +114,12 @@
       <Filter>GameContents</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
+      <Filter>GameContents</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldManager.h">
+      <Filter>GameContents</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManager.h">
       <Filter>GameContents</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,7 +14,13 @@ public class MapEditor
     [MenuItem("Tools/GenerateMap")]
     private static void GenerateMap()
     {
-        GameObject go = GameObject.Find("Map");
+        GenerateMap("Assets/Resources/Map/map.txt");
+        GenerateMap("../Common/Data/Map/map.txt");
+    }
+
+    private static void GenerateMap(string path)
+    {
+        GameObject go = GameObject.Find("World");
 
         if (go == null)
             return;
@@ -26,7 +32,7 @@ public class MapEditor
 
         world.CreateGrid();
 
-        using (var writer = File.CreateText("Assets/Resources/Map/map.txt"))
+        using (var writer = File.CreateText(path))
         {
             writer.WriteLine(world._nodeSize);
             writer.WriteLine(world.GridSizeX);
@@ -36,9 +42,9 @@ public class MapEditor
             writer.WriteLine(world.Grid[0, 0]._position.z);
             writer.WriteLine(world.Grid[world.GridSizeY - 1, 0]._position.z);
 
-            for(int y = world.GridSizeY - 1; y >= 0; y--)
+            for (int y = world.GridSizeY - 1; y >= 0; y--)
             {
-                for(int x = 0; x < world.GridSizeX; x++)
+                for (int x = 0; x < world.GridSizeX; x++)
                 {
                     bool isWalkable = world.Grid[y, x]._isWalkable;
                     if (isWalkable)
